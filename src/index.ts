@@ -4,7 +4,7 @@ import logger from "./utils/logger.js";
 import app from "./app.js";
 
 // 启动服务器
-const serveHotApi: (port?: number) => void = (port: number = config.PORT) => {
+const serveHotApi = (port: number = config.PORT) => {
   try {
     const apiServer = serve({
       fetch: app.fetch,
@@ -18,8 +18,16 @@ const serveHotApi: (port?: number) => void = (port: number = config.PORT) => {
   }
 };
 
-if (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "docker") {
+// 根据环境导出不同内容
+const exportedValue = process.env.VERCEL ? app.fetch : serveHotApi;
+
+// 只使用一个默认导出
+export default exportedValue;
+
+// 如果是开发环境，启动服务器
+if (
+  !process.env.VERCEL &&
+  (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "docker")
+) {
   serveHotApi(config.PORT);
 }
-
-export default serveHotApi;

@@ -32,6 +32,7 @@
     "dev": "cross-env NODE_ENV=development tsx watch --no-cache src/index.ts",
     "dev:cache": "cross-env NODE_ENV=development tsx watch src/index.ts",
     "build": "tsc --project tsconfig.json",
+    "vercel-build": "tsc --project tsconfig.json",
     "start": "cross-env NODE_ENV=development node dist/index.js"
   },
   "type": "module",
@@ -63,6 +64,7 @@
     "@types/xml2js": "^0.4.14",
     "@typescript-eslint/eslint-plugin": "^8.17.0",
     "@typescript-eslint/parser": "^8.17.0",
+    "@vercel/node": "^5.1.11",
     "cross-env": "^7.0.3",
     "eslint": "^9.16.0",
     "globals": "^15.13.0",
